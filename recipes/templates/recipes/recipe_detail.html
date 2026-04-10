@@ -1,0 +1,192 @@
+{% extends 'recipes/base.html' %}
+{% load static %}
+
+{% block title %}{{ recipe.title }} - Nolwazi Blog{% endblock %}
+
+{% block content %}
+<div class="fade-in-up">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="Breadcrumb" class="mb-4">
+        <ol class="breadcrumb glass px-4 py-2 rounded-pill d-inline-flex shadow-sm mb-0">
+            <li class="breadcrumb-item">
+                <a href="{% url 'recipe_list' %}" class="text-danger fw-semibold text-decoration-none">
+                    <i class="bi bi-house me-1" aria-hidden="true"></i>All Recipes
+                </a>
+            </li>
+            <li class="breadcrumb-item active fw-semibold text-truncate" style="max-width: 280px;" aria-current="page">
+                {{ recipe.title }}
+            </li>
+        </ol>
+    </nav>
+
+    <!-- Recipe Hero -->
+    <div class="position-relative mb-5">
+        {% if recipe.image %}
+        <img src="{{ recipe.image.url }}" class="recipe-hero-img w-100 shadow-lg" alt="{{ recipe.title }}" loading="lazy">
+        {% else %}
+        <div class="recipe-hero-placeholder">
+            <i class="bi bi-camera" aria-hidden="true"></i>
+            <span class="fw-semibold text-muted">No image uploaded</span>
+        </div>
+        {% endif %}
+        <span class="difficulty-badge difficulty-badge--overlay badge-{{ recipe.difficulty }} z-10">
+            {{ recipe.get_difficulty_display }}
+        </span>
+    </div>
+
+    <!-- Title & Meta -->
+    <div class="row g-4 mb-5">
+        <div class="col-lg-8">
+            <h1 class="fw-bold mb-3 display-5 recipe-title-gradient">{{ recipe.title }}</h1>
+            <p class="lead text-muted fs-4 mb-4 lh-lg">{{ recipe.description }}</p>
+            <div class="d-flex align-items-center gap-3 flex-wrap mb-4">
+                {% if recipe.submitted_by %}
+                <span class="badge bg-gradient-danger text-white px-3 py-2 fs-6 fw-semibold shadow-sm">
+                    <i class="bi bi-person-heart me-1"></i>by {{ recipe.submitted_by }}
+                </span>
+                {% endif %}
+                <span class="badge bg-secondary-subtle px-3 py-2 fs-6">
+                    <i class="bi bi-calendar3 me-1"></i>{{ recipe.created_at|date:"N j, Y" }}
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <!-- Quick Actions -->
+            <div class="card glass shadow-lg border-0 sticky-top" style="top: 100px;">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-3 text-danger"><i class="bi bi-lightning-charge me-2"></i>Quick Actions</h6>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-danger glass fw-semibold py-3 no-print" onclick="window.print()">
+                            <i class="bi bi-printer me-2" aria-hidden="true"></i>Print Recipe
+                        </button>
+                        <a href="{% url 'recipe_list' %}" class="btn btn-outline-secondary glass fw-semibold py-3">
+                            <i class="bi bi-grid me-2" aria-hidden="true"></i>Browse More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-5">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            
+            <!-- Ingredients -->
+            <div class="card glass shadow-lg border-0 mb-5">
+                <div class="card-header bg-gradient-danger text-white fw-bold rounded-top p-4">
+                    <i class="bi bi-list-check me-2" aria-hidden="true"></i>Ingredients
+                </div>
+                <div class="card-body pt-4">
+                    <ul class="list-unstyled mb-0 ps-4">
+                        {% for ingredient in ingredients_list %}
+                        <li class="d-flex align-items-start mb-3 fs-5">
+                            <input type="checkbox" class="form-check-input mt-1 me-3 flex-shrink-0" style="width: 22px; height: 22px;" id="ing-{{ forloop.counter }}">
+                            <label for="ing-{{ forloop.counter }}" class="form-check-label fw-medium lh-lg cursor-pointer">{{ ingredient }}</label>
+                        </li>
+                        {% empty %}
+                        <li class="text-muted fs-5 py-4 text-center">No ingredients listed. 😊</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div class="card glass shadow-lg border-0">
+                <div class="card-header bg-gradient-danger text-white fw-bold rounded-top p-4">
+                    <i class="bi bi-journal-text me-2"></i>Step-by-Step Instructions
+                </div>
+                <div class="card-body pt-4">
+                    {% for step_num, step in instructions_steps %}
+                    <div class="instruction-step glass mb-4 p-4 rounded-4 shadow-sm border-start border-4 border-danger position-relative overflow-hidden">
+                        <div class="step-number position-absolute bg-danger text-white rounded-circle d-flex align-items-center justify-content-center fw-bold fs-6" style="width: 44px; height: 44px; left: -22px; top: 20px;">
+                            {{ step_num }}
+                        </div>
+                        <div class="ps-5">
+                            <p class="mb-2 fw-medium fs-5 lh-lg">{{ step }}</p>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="instruction-step glass p-4 rounded-4 text-center text-muted">
+                        Full instructions in the description above. 📝
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Enhanced Sidebar -->
+        <div class="col-lg-4">
+            <div class="sticky-top" style="top: 100px;">
+
+                <!-- Recipe Info Cards -->
+                <div class="card glass shadow-lg border-0 mb-4">
+                    <div class="card-header bg-secondary-subtle text-dark fw-bold rounded-top p-3">
+                        <i class="bi bi-info-circle me-2"></i>Recipe Info
+                    </div>
+                    <div class="card-body pt-4">
+                        <div class="d-grid gap-3 text-center">
+                            <div>
+                                <span class="difficulty-badge badge-{{ recipe.difficulty }} d-inline-block fs-6 px-4 py-2">
+                                    {{ recipe.get_difficulty_display }}
+                                </span>
+                                <small class="text-muted fw-semibold d-block mt-2">Difficulty</small>
+                            </div>
+                            {% if recipe.submitted_by %}
+                            <div class="border-top pt-3">
+                                <div class="fw-bold text-danger mb-1">{{ recipe.submitted_by }}</div>
+                                <small class="text-muted fw-semibold">Submitted by</small>
+                            </div>
+                            {% endif %}
+                            <div class="border-top pt-3">
+                                <div class="fw-bold mb-1">{{ recipe.created_at|date:"N j, Y" }}</div>
+                                <small class="text-muted fw-semibold">Added</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if user.is_authenticated %}
+                <!-- Admin Controls -->
+                <div class="card glass shadow-lg border-0 border-warning mb-4">
+                    <div class="card-header bg-warning text-dark fw-bold rounded-top p-3">
+                        <i class="bi bi-gear me-2"></i>Admin Panel
+                    </div>
+                    <div class="card-body pt-4">
+                        <div class="d-grid gap-2">
+                            <a href="{% url 'recipe_update' recipe.slug %}" class="btn btn-warning glass fw-bold py-3">
+                                <i class="bi bi-pencil-square me-2" aria-hidden="true"></i>Edit Recipe
+                            </a>
+                            <a href="{% url 'recipe_delete' recipe.slug %}" class="btn btn-outline-danger glass fw-bold py-3">
+                                <i class="bi bi-trash me-2" aria-hidden="true"></i>Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Browse More -->
+                <div class="card glass shadow-lg border-0">
+                    <div class="card-header bg-primary-subtle text-primary fw-bold rounded-top p-3">
+                        <i class="bi bi-grid me-2"></i>Explore More
+                    </div>
+                    <div class="card-body pt-3 d-grid gap-2">
+                        <a href="{% url 'recipe_list' %}?difficulty={{ recipe.difficulty }}" class="btn btn-outline-danger glass fw-semibold py-2">
+                            <i class="bi bi-funnel me-2"></i>More {{ recipe.get_difficulty_display }} Recipes
+                        </a>
+                        <a href="{% url 'recipe_list' %}" class="btn btn-outline-secondary glass fw-semibold py-2">
+                            <i class="bi bi-grid me-2"></i>All Recipes
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+

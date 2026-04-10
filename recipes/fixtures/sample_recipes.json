@@ -1,0 +1,114 @@
+[
+  {
+    "model": "recipes.recipe",
+    "pk": 1,
+    "fields": {
+      "title": "Bobotie",
+      "slug": "bobotie",
+      "description": "A classic South African dish made with spiced minced meat and topped with a golden egg custard. Comfort food at its finest.",
+      "ingredients": "500g minced beef, 2 slices white bread, 250ml milk, 2 onions chopped, 2 cloves garlic, 30ml curry powder, 15ml turmeric, 30ml apricot jam, 30ml fruit chutney, 2 eggs, 6 bay leaves, salt and pepper",
+      "instructions": "Preheat oven to 180°C.\nSoak bread in half the milk, then squeeze out excess and crumble.\nFry onion and garlic until soft. Add curry powder and turmeric, cook 1 minute.\nAdd mince and brown well. Stir in jam, chutney, and crumbled bread.\nSeason with salt and pepper then spoon into a greased baking dish. Smooth the top.\nBeat eggs with remaining milk, pour over the mince. Lay bay leaves on top.\nBake 30–35 minutes until custard is set and golden.",
+      "image": "",
+      "created_at": "2025-01-10T08:00:00Z",
+      "updated_at": "2025-01-10T08:00:00Z"
+    }
+  },
+  {
+    "model": "recipes.recipe",
+    "pk": 2,
+    "fields": {
+      "title": "Malva Pudding",
+      "slug": "malva-pudding",
+      "description": "A warm, sticky South African dessert with a caramelised sponge soaked in sweet cream sauce. Serve with vanilla ice cream.",
+      "ingredients": "1 cup sugar, 2 eggs, 1 tbsp apricot jam, 1 cup flour, 1 tsp bicarbonate of soda, pinch of salt, 1 tbsp butter, 1 tsp vinegar, 1 cup milk, 1 cup cream, half cup butter (sauce), half cup sugar (sauce), quarter cup hot water (sauce)",
+      "instructions": "Preheat oven to 180°C. Grease a medium baking dish.\nBeat eggs and sugar until pale and fluffy. Mix in jam.\nMelt butter, stir in vinegar and milk, then add to egg mixture.\nFold in flour, bicarb, and salt until smooth.\nPour into dish and bake 30–35 minutes until a skewer comes out clean.\nFor sauce: combine cream, butter, sugar, and hot water in a saucepan. Heat until butter melts and sugar dissolves.\nPour warm sauce over hot pudding as soon as it comes out of the oven. Serve immediately.",
+      "image": "",
+      "created_at": "2025-01-12T09:00:00Z",
+      "updated_at": "2025-01-12T09:00:00Z"
+    }
+  },
+  {
+    "model": "recipes.recipe",
+    "pk": 3,
+    "fields": {
+      "title": "Pap and Chakalaka",
+      "slug": "pap-and-chakalaka",
+      "description": "Stiff maize porridge paired with a bold, spicy vegetable relish. A South African staple enjoyed at braais and family meals.",
+      "ingredients": "2 cups maize meal, 4 cups water, 1 tsp salt (pap), 2 onions diced, 2 cloves garlic, 1 tin baked beans, 2 carrots grated, 1 green pepper diced, 2 tomatoes chopped, 2 tsp curry powder, 1 tsp paprika, chilli flakes to taste, oil for frying",
+      "instructions": "For pap: bring salted water to the boil. Add maize meal gradually, stirring constantly to avoid lumps.\nReduce heat to very low, cover, and cook 20–25 minutes. Stir every 5 minutes until thick and stiff.\nFor chakalaka: fry onion and garlic in oil until soft. Add curry powder, paprika, and chilli, cook 1 minute.\nAdd carrot and green pepper, cook 5 minutes. Add tomatoes and cook until soft.\nStir in baked beans and simmer 10 minutes. Season to taste.\nServe chakalaka piled on top of or beside the pap.",
+      "image": "",
+      "created_at": "2025-01-15T10:00:00Z",
+      "updated_at": "2025-01-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "recipes.recipe",
+    "pk": 4,
+    "fields": {
+      "title": "Milk Tart (Melktert)",
+      "slug": "milk-tart-melktert",
+      "description": "A beloved South African baked custard tart with a buttery pastry shell, dusted with cinnamon. Melt-in-your-mouth delicious.",
+      "ingredients": "1 cup flour (pastry), 125g cold butter, 2 tbsp icing sugar, 1 egg yolk, 2 cups milk, 3 tbsp sugar, 2 tbsp cornflour, 2 eggs, 1 tsp vanilla essence, 1 tbsp butter (filling), cinnamon for dusting",
+      "instructions": "Make pastry: rub butter into flour and icing sugar until like breadcrumbs. Mix in egg yolk. Press into a greased 23cm tart tin. Refrigerate 20 minutes.\nBake blind at 180°C for 15 minutes. Remove weights and bake 5 more minutes.\nFor filling: heat milk until just simmering. Whisk sugar, cornflour, and eggs together, then pour in warm milk slowly.\nReturn to saucepan and stir over medium heat until thick enough to coat the back of a spoon.\nRemove from heat, stir in vanilla and butter.\nPour into tart shell. Dust generously with cinnamon.\nChill at least 2 hours before serving.",
+      "image": "",
+      "created_at": "2025-01-18T11:00:00Z",
+      "updated_at": "2025-01-18T11:00:00Z"
+    }
+  },
+  {
+    "model": "recipes.recipe",
+    "pk": 5,
+    "fields": {
+      "title": "Vetkoek with Mince",
+      "slug": "vetkoek-with-mince",
+      "description": "Deep-fried bread pockets filled with savoury curried mince. A street-food classic that is pure South African soul food.",
+      "ingredients": "3 cups flour, 1 packet instant yeast, 1 tsp sugar, 1 tsp salt, 1 cup warm water, oil for deep frying, 500g mince, 1 onion diced, 1 tsp curry powder, 1 tsp tomato paste, salt and pepper",
+      "instructions": "Mix flour, yeast, sugar, and salt. Add warm water gradually and knead until smooth and elastic (8–10 minutes).\nCover and let rise in a warm place until doubled, about 1 hour.\nKnock down and divide into 12 balls. Rest 10 minutes.\nHeat oil to 175°C. Fry vetkoek in batches 3–4 minutes per side until golden brown and cooked through. Drain on paper towel.\nFor mince: fry onion until golden. Add mince and brown well. Stir in curry powder and tomato paste. Cook 10 minutes. Season.\nSplit open vetkoek and fill generously with mince.",
+      "image": "",
+      "created_at": "2025-01-20T12:00:00Z",
+      "updated_at": "2025-01-20T12:00:00Z"
+    }
+  },
+  {
+    "model": "recipes.recipe",
+    "pk": 6,
+    "fields": {
+      "title": "Braai Chicken (Peri-Peri)",
+      "slug": "braai-chicken-peri-peri",
+      "description": "Juicy, fire-grilled chicken marinated in a punchy peri-peri sauce. Perfect for weekends around the braai.",
+      "ingredients": "1 whole chicken butterflied, 6 red chillies, 4 cloves garlic, juice of 2 lemons, 100ml olive oil, 1 tsp paprika, 1 tsp oregano, 1 tsp salt, 1 tsp sugar",
+      "instructions": "Blend chillies, garlic, lemon juice, olive oil, paprika, oregano, salt, and sugar into a smooth marinade.\nScore the chicken skin and rub marinade all over, including under the skin. Marinate at least 4 hours or overnight.\nLight the braai and let coals burn to medium heat (not flaming).\nGrill chicken bone-side down for 20 minutes, then flip. Baste with remaining marinade.\nCook skin-side down 15–20 minutes until cooked through and juices run clear.\nRest 5 minutes before carving.",
+      "image": "",
+      "created_at": "2025-01-22T13:00:00Z",
+      "updated_at": "2025-01-22T13:00:00Z"
+    }
+  },
+  {
+    "model": "recipes.recipe",
+    "pk": 7,
+    "fields": {
+      "title": "Koeksisters",
+      "slug": "koeksisters",
+      "description": "Twisted syrup-soaked doughnuts that are crispy on the outside and sticky sweet on the inside. A truly South African treat.",
+      "ingredients": "3 cups flour, 3 tsp baking powder, half tsp salt, 3 tbsp butter, 1 egg, 200ml milk, oil for frying, 4 cups sugar (syrup), 2 cups water (syrup), 2 tsp cream of tartar, 1 cinnamon stick, juice of 1 lemon",
+      "instructions": "Make syrup the night before: bring sugar, water, cream of tartar, and cinnamon to boil until sugar dissolves. Add lemon juice, cool, then refrigerate.\nFor dough: rub butter into flour, baking powder, and salt. Mix in egg and milk to form a soft dough. Rest 30 minutes.\nRoll dough 1cm thick. Cut into strips 8cm long, then slice each strip into 3 thinner strips leaving one end joined. Plait the three strips and press ends together.\nHeat oil to 180°C. Fry koeksisters until golden, turning once.\nImmediately dip hot koeksisters into ice-cold syrup for 30 seconds. Lift out and cool on a rack.",
+      "image": "",
+      "created_at": "2025-01-25T09:00:00Z",
+      "updated_at": "2025-01-25T09:00:00Z"
+    }
+  },
+  {
+    "model": "recipes.recipe",
+    "pk": 8,
+    "fields": {
+      "title": "Umngqusho (Samp and Beans)",
+      "slug": "umngqusho-samp-and-beans",
+      "description": "A traditional Xhosa dish of dried corn and sugar beans slow-cooked until tender. Nourishing, earthy, and full of heritage.",
+      "ingredients": "2 cups samp (dried corn kernels), 1 cup dried sugar beans, 1 onion diced, 2 tbsp butter, salt and pepper, water for soaking and cooking",
+      "instructions": "Soak samp and beans separately overnight in cold water.\nDrain and rinse. Place in a large pot and cover with fresh water by 5cm.\nBring to a boil, then reduce to a gentle simmer. Cook 2–3 hours until samp and beans are very tender, adding water as needed.\nWhen almost done, fry onion in butter until golden and stir into the pot.\nSeason generously with salt and pepper. The texture should be thick and creamy.\nServe as a main dish or alongside meat.",
+      "image": "",
+      "created_at": "2025-01-28T10:00:00Z",
+      "updated_at": "2025-01-28T10:00:00Z"
+    }
+  }
+]

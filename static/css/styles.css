@@ -1,0 +1,457 @@
+/* Nolwazi Blog — styles.css
+   ─────────────────────────────────────────────────────────
+   Layer order:
+     1. Variables & Theme
+     2. Base / Reset
+     3. Layout  (navbar · hero · footer)
+     4. Components (glass · cards · badges · buttons · skeleton)
+     5. Pages   (list · detail)
+     6. Keyframes & Animations
+     7. Responsive & Print
+   ───────────────────────────────────────────────────────── */
+
+
+/* ═══════════════════════════════════════════════════════════
+   1. VARIABLES & THEME
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --brand:        #e63946;
+  --brand-light:  #ff6b6b;
+  --brand-glow:   #ff4757;
+  --bg:           #ffffff;
+  --bg-soft:      #f8f9fa;
+  --card-bg:      rgba(255, 255, 255, 0.9);
+  --text:         #212529;
+  --text-muted:   #5a6068;        /* 5.7:1 on white — WCAG AA */
+  --radius:       20px;
+  --shadow-sm:    0 4px 16px rgba(0,0,0,.08);
+  --shadow-md:    0 12px 32px rgba(0,0,0,.15);
+  --glass-bg:     rgba(255, 255, 255, 0.25);
+  --glass-blur:   blur(20px);
+}
+
+.dark-theme {
+  --bg:           #0a0a0a;
+  --bg-soft:      #1a1a1a;
+  --card-bg:      rgba(26, 26, 26, 0.9);
+  --text:         #f9f9f9;
+  --text-muted:   #c0c0c0;        /* 6.8:1 on #0a0a0a — WCAG AA */
+  --shadow-sm:    0 4px 16px rgba(0,0,0,.6);
+  --shadow-md:    0 12px 32px rgba(0,0,0,.7);
+  --glass-bg:     rgba(26, 26, 26, 0.5);
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   2. BASE / RESET
+   ═══════════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Visible focus ring — WCAG 2.4.7 */
+:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg), var(--bg-soft));
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.65;
+  transition: background-color .4s cubic-bezier(0.4, 0, 0.2, 1),
+              color         .4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Static dot texture — no animation */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image:
+    radial-gradient(2px 2px at  20px  30px, rgba(255,107,107,.13), transparent),
+    radial-gradient(2px 2px at  40px  70px, rgba(255, 71, 87,.13), transparent),
+    radial-gradient(1px 1px at  90px  40px, rgba(255, 71, 87,.13), transparent),
+    radial-gradient(1px 1px at 130px  80px, rgba(230, 57, 70,.13), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   3. LAYOUT  (navbar · hero · footer)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Navbar ─────────────────────────────────────────────── */
+
+.navbar {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar-brand {
+  font-size: 1.3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--brand), var(--brand-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.search-form .form-control:focus {
+  box-shadow: 0 0 0 4px rgba(230,57,70,.3);
+  border-color: var(--brand);
+  transform: scale(1.02);
+}
+
+/* Active nav indicator */
+.active-nav {
+  position: relative;
+  color: var(--brand) !important;
+}
+.active-nav::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 100%; height: 2px;
+  background: var(--brand);
+  box-shadow: 0 0 10px var(--brand-glow);
+}
+
+/* ── Hero ────────────────────────────────────────────────── */
+
+.hero-banner {
+  background: linear-gradient(135deg, #e63946 0%, #c1121f 40%, #9d0208 100%);
+  min-height: 400px;
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 10px 50px rgba(0,0,0,.3);
+}
+
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(255,255,255,.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,.2) 0%, transparent 50%);
+  animation: heroFadeIn .8s ease-out forwards;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #fff, rgba(255,255,255,.8));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: heroFadeIn .6s ease-out forwards;
+}
+
+.hero-content { position: relative; z-index: 2; }
+
+
+/* Hero CTA buttons */
+.hero-btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255,255,255,.95);
+  color: var(--brand);
+  font-weight: 800;
+  border: none;
+  border-radius: 50px;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  box-shadow: 0 8px 25px rgba(230,57,70,.4);
+  transition: transform .3s cubic-bezier(0.4,0,.2,1),
+              box-shadow .3s cubic-bezier(0.4,0,.2,1);
+}
+.hero-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
+  transition: left .5s;
+}
+.hero-btn-primary:hover::before { left: 100%; }
+.hero-btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(230,57,70,.6);
+  color: var(--brand);
+}
+
+.hero-btn-outline {
+  border-radius: 50px;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: transform .3s cubic-bezier(0.4,0,.2,1),
+              background-color .3s;
+}
+.hero-btn-outline:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,.15);
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   4. COMPONENTS
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Glass ───────────────────────────────────────────────── */
+
+/* Base glass: no shadow — each consumer adds its own */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255,255,255,.2);
+}
+
+/* ── Recipe Card ─────────────────────────────────────────── */
+
+.recipe-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  /* Stagger animation + hover transition in one block */
+  animation: fadeInUpStagger .6s cubic-bezier(0.4,0,.2,1) forwards;
+  opacity: 0;
+  transition: transform .4s cubic-bezier(0.4,0,.2,1),
+              box-shadow .4s cubic-bezier(0.4,0,.2,1);
+}
+
+/* Brand top-border reveal on hover */
+.recipe-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-light), var(--brand));
+  opacity: 0;
+  transition: opacity .3s;
+}
+.recipe-card:hover::before { opacity: 1; }
+
+.recipe-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md), 0 0 40px rgba(230,57,70,.3);
+}
+
+/* Stagger delays — covers full 12-card page */
+.recipe-card:nth-child(1)  { animation-delay: .05s; }
+.recipe-card:nth-child(2)  { animation-delay: .10s; }
+.recipe-card:nth-child(3)  { animation-delay: .15s; }
+.recipe-card:nth-child(4)  { animation-delay: .20s; }
+.recipe-card:nth-child(5)  { animation-delay: .25s; }
+.recipe-card:nth-child(6)  { animation-delay: .30s; }
+.recipe-card:nth-child(7)  { animation-delay: .35s; }
+.recipe-card:nth-child(8)  { animation-delay: .40s; }
+.recipe-card:nth-child(9)  { animation-delay: .45s; }
+.recipe-card:nth-child(10) { animation-delay: .50s; }
+.recipe-card:nth-child(11) { animation-delay: .55s; }
+.recipe-card:nth-child(12) { animation-delay: .60s; }
+
+/* Card image */
+.card-img-wrapper {
+  height: 220px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg-soft), rgba(230,57,70,.05));
+  position: relative;
+}
+
+.card-img-top {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .6s cubic-bezier(0.4,0,.2,1);
+}
+.recipe-card:hover .card-img-top { transform: scale(1.08); }
+
+/* Card title gradient */
+.card-title {
+  background: linear-gradient(135deg, var(--text), var(--brand));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.1rem;
+}
+
+/* ── Difficulty Badge ────────────────────────────────────── */
+
+/* Base: inline use (sidebar, info cards) */
+.difficulty-badge {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 800;
+  padding: .35rem .8rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  backdrop-filter: blur(10px);
+}
+
+/* Overlay modifier: positioned over a card image */
+.difficulty-badge--overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,.2);
+}
+
+.badge-easy   { background: linear-gradient(135deg, #10b981, #34d399); color: #065f46; }
+.badge-medium { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #92400e; }
+.badge-hard   { background: linear-gradient(135deg, #ef4444, #f87171); color: #991b1b; }
+
+/* ── Buttons ─────────────────────────────────────────────── */
+
+/* Scoped — does not override Bootstrap's own .btn-danger states */
+.btn-danger {
+  box-shadow: 0 6px 20px rgba(230,57,70,.4);
+  transition: transform .3s cubic-bezier(0.4,0,.2,1),
+              box-shadow .3s cubic-bezier(0.4,0,.2,1);
+}
+.btn-danger:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(230,57,70,.6);
+}
+
+/* ── Pagination ──────────────────────────────────────────── */
+
+.pagination-btn {
+  width: 44px;
+  height: 44px;
+}
+
+/* ── Skeleton shimmer ────────────────────────────────────── */
+
+.htmx-request #recipes-grid { opacity: .6; }
+
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-soft) 25%, rgba(255,255,255,.6) 50%, var(--bg-soft) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+.skeleton-card { height: 300px; border-radius: var(--radius); }
+
+
+/* ═══════════════════════════════════════════════════════════
+   5. PAGES
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Image Placeholders ──────────────────────────────────── */
+
+/* Card list placeholder (220px tall) */
+.card-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--bg-soft), rgba(230,57,70,.06));
+  color: var(--text-muted);
+  font-size: 2.5rem;
+}
+
+/* Detail hero placeholder */
+.recipe-hero-placeholder {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  background: linear-gradient(135deg, var(--bg-soft), rgba(230,57,70,.06));
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 2.5rem;
+}
+
+/* ── Recipe Detail ───────────────────────────────────────── */
+
+/* Title gradient — replaces inline style on <h1> */
+.recipe-title-gradient {
+  background: linear-gradient(135deg, var(--text), var(--brand));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.recipe-hero-img {
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  transition: transform .5s ease;
+}
+.recipe-hero-img:hover { transform: scale(1.02); }
+
+.instruction-step {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border-left: 5px solid var(--brand);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: transform .2s;
+}
+.instruction-step:hover { transform: translateX(8px); }
+
+.step-number      { box-shadow: 0 4px 12px rgba(230,57,70,.4); }
+.cursor-pointer   { cursor: pointer; }
+
+.bg-gradient-danger {
+  background: linear-gradient(135deg, var(--brand), var(--brand-light)) !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   6. KEYFRAMES & ANIMATIONS
+   ═══════════════════════════════════════════════════════════ */
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInUpStagger {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position:  200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   7. RESPONSIVE & PRINT
+   ═══════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .hero-banner { min-height: 350px; padding: 4rem 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:        .01ms !important;
+    animation-iteration-count: 1    !important;
+    transition-duration:       .01ms !important;
+  }
+}
+
+@media print {
+  .navbar, footer, .no-print { display: none; }
+  .instruction-step { background: #f8f9fa !important; box-shadow: none; }
+}

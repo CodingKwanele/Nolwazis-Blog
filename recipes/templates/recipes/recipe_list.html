@@ -1,0 +1,146 @@
+{% extends 'recipes/base.html' %}
+{% load static %}
+
+{% block title %}All Recipes - Nolwazi Blog{% endblock %}
+
+{% block content %}
+
+<!-- Section Header + Filter -->
+<section
+    class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4 glass p-3 rounded"
+    style="max-width: 600px;"
+>
+    <h2 class="section-title mb-0">
+        <i class="bi bi-grid-3x3-gap me-2 text-danger"></i>All Recipes
+    </h2>
+
+    <div class="d-flex align-items-center gap-2">
+        <label for="difficulty-filter" class="text-muted small mb-0 fw-semibold">Filter:</label>
+        <select
+            id="difficulty-filter"
+            name="difficulty"
+            class="form-select form-select-sm"
+            style="min-width: 120px;"
+            hx-get="{% url 'recipe_list' %}"
+            hx-trigger="change"
+            hx-target="#recipes-grid"
+            hx-swap="outerHTML"
+            hx-push-url="true"
+        >
+            <option value="" {% if not selected_difficulty %}selected{% endif %}>All Levels</option>
+            <option value="easy" {% if selected_difficulty == 'easy' %}selected{% endif %}>Easy</option>
+            <option value="medium" {% if selected_difficulty == 'medium' %}selected{% endif %}>Medium</option>
+            <option value="hard" {% if selected_difficulty == 'hard' %}selected{% endif %}>Hard</option>
+        </select>
+    </div>
+</section>
+
+<!-- Recipes Grid -->
+<div id="recipes-grid" class="position-relative">
+    <div class="row g-4">
+        {% for recipe in recipes %}
+            <div class="col-xl-3 col-lg-4 col-md-6 recipe-col">
+                <a href="{% url 'recipe_detail' recipe.slug %}" class="text-decoration-none">
+                    <article class="recipe-card card h-100 glass fade-in-up">
+                        <div class="card-img-wrapper">
+                            {% if recipe.image %}
+                                <img
+                                    src="{{ recipe.image.url }}"
+                                    class="card-img-top"
+                                    alt="{{ recipe.title }}"
+                                    loading="lazy"
+                                >
+                            {% else %}
+                                <div class="card-img-placeholder d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-camera" aria-hidden="true"></i>
+                                </div>
+                            {% endif %}
+
+                            <span class="difficulty-badge difficulty-badge--overlay badge-{{ recipe.difficulty }}">
+                                {{ recipe.get_difficulty_display }}
+                            </span>
+                        </div>
+
+                        <div class="card-body d-flex flex-column p-4">
+                            <h6 class="card-title fw-bold mb-2" style="font-size: 1.1rem;">
+                                {{ recipe.title }}
+                            </h6>
+
+                            <p class="card-text text-muted small flex-grow-1 mb-3">
+                                {{ recipe.description|truncatechars:90 }}
+                            </p>
+
+                            <div class="d-flex align-items-center justify-content-between mt-auto">
+                                <small class="text-muted">
+                                    <i class="bi bi-calendar3 me-1"></i>
+                                    {{ recipe.created_at|date:"M d, Y" }}
+                                </small>
+
+                                <span class="btn btn-sm btn-danger px-3 py-1">
+                                    <i class="bi bi-arrow-right"></i> View
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                </a>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="text-center py-5 text-muted fade-in-up">
+                    <i class="bi bi-funnel text-danger" style="font-size: 3rem;" aria-hidden="true"></i>
+                    <h3 class="mt-4 mb-3 fw-bold">No Recipes Match Your Filter</h3>
+                    <p class="lead mb-4">
+                        Try adjusting the difficulty level or
+                        <a href="{% url 'recipe_list' %}" class="text-danger fw-semibold">browse all recipes</a>.
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if page_obj and page_obj.paginator.num_pages > 1 %}
+        <nav class="mt-5 d-flex justify-content-center" aria-label="Recipe pagination">
+            <ul class="pagination glass p-2 rounded-pill gap-1 mb-0">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <button
+                            type="button"
+                            class="page-link rounded-circle pagination-btn"
+                            hx-get="?page={{ page_obj.previous_page_number }}{% if selected_difficulty %}&difficulty={{ selected_difficulty }}{% endif %}"
+                            hx-target="#recipes-grid"
+                            hx-swap="outerHTML"
+                            hx-push-url="true"
+                            aria-label="Previous page"
+                        >
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                    </li>
+                {% endif %}
+
+                <li class="page-item active">
+                    <span class="page-link px-4 py-2 rounded-pill bg-danger border-0 text-white fw-bold">
+                        {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                    </span>
+                </li>
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <button
+                            type="button"
+                            class="page-link rounded-circle pagination-btn"
+                            hx-get="?page={{ page_obj.next_page_number }}{% if selected_difficulty %}&difficulty={{ selected_difficulty }}{% endif %}"
+                            hx-target="#recipes-grid"
+                            hx-swap="outerHTML"
+                            hx-push-url="true"
+                            aria-label="Next page"
+                        >
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+</div>
+
+{% endblock %}

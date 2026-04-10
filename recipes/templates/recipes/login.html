@@ -1,0 +1,28 @@
+{% extends 'recipes/auth_base.html' %}
+
+{% block auth_title %}Welcome Back{% endblock %}
+{% block auth_subtitle %}Login to explore recipes{% endblock %}
+
+{% block auth_form %}
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label class="form-label fw-semibold">Username</label>
+        <input type="text" name="username" class="form-control form-control-lg" placeholder="Enter your username" autofocus required>
+        {% if form.username.errors %}<div class="text-danger small mt-1">{{ form.username.errors }}</div>{% endif %}
+    </div>
+    <div class="mb-4">
+        <label class="form-label fw-semibold">Password</label>
+        <input type="password" name="password" class="form-control form-control-lg" placeholder="Enter your password" required>
+        {% if form.password.errors %}<div class="text-danger small mt-1">{{ form.password.errors }}</div>{% endif %}
+    </div>
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger py-2 small">{{ form.non_field_errors }}</div>
+    {% endif %}
+    <button type="submit" class="btn btn-danger w-100 btn-lg">Login</button>
+</form>
+<hr class="my-4">
+<p class="text-center text-muted mb-0">
+    Don't have an account? <a href="{% url 'register' %}" class="text-danger fw-semibold">Create one free</a>
+</p>
+{% endblock %}
