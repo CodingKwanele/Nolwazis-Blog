@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "buildCommand": "pip install -r requirements.txt && python manage.py collectstatic --noinput",
+  "builds": [
+    {
+      "src": "nolwazi_blog/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "nolwazi_blog/wsgi.py"
+    }
+  ]
+}
