@@ -7,3 +7,6 @@ media/
 staticfiles/
 .env
 TODO.md
+
+.vercel
+.env*.local
