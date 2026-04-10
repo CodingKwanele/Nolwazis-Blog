@@ -7,7 +7,6 @@
 <div class="row justify-content-center">
     <div class="col-lg-7">
 
-        <!-- Back link -->
         <a href="{% url 'recipe_list' %}" class="btn btn-sm glass px-4 py-2 mb-4 text-muted shadow-sm fw-semibold text-decoration-none d-inline-flex align-items-center">
             <i class="bi bi-arrow-left me-2"></i> All Recipes
         </a>
@@ -19,7 +18,7 @@
                 </h4>
             </div>
             <div class="card-body p-4 p-md-5">
-                <form method="post" enctype="multipart/form-data">
+                <form method="post">
                     {% csrf_token %}
                     {% for field in form %}
                     <div class="mb-4">
