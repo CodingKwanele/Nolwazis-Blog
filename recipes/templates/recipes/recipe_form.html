@@ -18,7 +18,7 @@
                 </h4>
             </div>
             <div class="card-body p-4 p-md-5">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% for field in form %}
                     <div class="mb-4">
