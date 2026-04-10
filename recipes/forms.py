@@ -4,14 +4,7 @@ from .models import Recipe
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = [
-            'title',
-            'submitted_by',
-            'description',
-            'difficulty',
-            'ingredients',
-            'instructions',
-        ]
+        fields = ['title', 'submitted_by', 'description', 'difficulty', 'ingredients', 'instructions', 'image']
         widgets = {
             'difficulty': forms.Select(attrs={
                 'class': 'form-select',
@@ -38,5 +31,8 @@ class RecipeForm(forms.ModelForm):
                 'class': 'form-control',
                 'rows': 8,
                 'placeholder': 'Enter each step on a new line',
+            }),
+            'image': forms.ClearableFileInput(attrs={
+                'class': 'form-control',
             }),
         }
