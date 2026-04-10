@@ -49,7 +49,7 @@ def recipe_detail(request, slug):
 @login_required
 def recipe_create(request):
     if request.method == 'POST':
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('recipe_list')
@@ -62,7 +62,7 @@ def recipe_create(request):
 def recipe_update(request, slug):
     recipe = get_object_or_404(Recipe, slug=slug)
     if request.method == 'POST':
-        form = RecipeForm(request.POST, instance=recipe)
+        form = RecipeForm(request.POST, request.FILES, instance=recipe)
         if form.is_valid():
             form.save()
             return redirect('recipe_detail', slug=recipe.slug)
@@ -98,6 +98,7 @@ def register(request):
             return redirect('recipe_list')
     else:
         form = UserCreationForm()
+    # Add Bootstrap styling to all fields
     for field in form.fields.values():
         field.widget.attrs.update({'class': 'form-control form-control-lg'})
     return render(request, 'recipes/register.html', {'form': form})
