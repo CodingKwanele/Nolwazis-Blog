@@ -18,7 +18,7 @@ ALLOWED_HOSTS = [
     host.strip()
     for host in os.environ.get(
         'DJANGO_ALLOWED_HOSTS',
-        'localhost,127.0.0.1'
+        'localhost,127.0.0.1,nolwazis-blog.vercel.app'
     ).split(',')
     if host.strip()
 ]
@@ -69,7 +69,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'nolwazi_blog.wsgi.application'
 
-# Database — reads DATABASE_URL env var in production, falls back to SQLite locally
 DATABASES = {
     'default': dj_database_url.config(
         default=f'sqlite:///{BASE_DIR}/db.sqlite3',
@@ -92,7 +91,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -104,7 +102,6 @@ LOGOUT_REDIRECT_URL = '/login/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Security — Vercel terminates SSL and forwards X-Forwarded-Proto: https
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = not DEBUG
 SESSION_COOKIE_SECURE = not DEBUG
